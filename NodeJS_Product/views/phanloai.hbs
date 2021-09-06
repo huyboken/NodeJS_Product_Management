@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-sm-6">
+          <h1>Phân loại</h1>
+        </div>
+        <div class="col-sm-6  text-right">
+          <button type="button" class="btn btn-primary"  onclick ="goBack()" >Go Back</button>
+        </div>
+        <div class="col-sm-12 text-right">
+            <button type="button" class="btn btn-primary" onclick="goToAdd()">ADD</button>
+        </div>
+      </div>
+
+  <table class="mt-5 table table-bordered">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+         {{#each loaiSP}}
+            <tr>
+              <td>{{this._id}}</td>
+              <td>{{this.name}}</td>
+              <td class='text-right'>
+            <button type="button" class="btn btn-success" onclick="update('{{this._id}}')">Update</button>
+            <button type="button" class="btn btn-danger" onclick="deletepl('{{this._id}}')">Delete</button>
+              </td>
+              </tr>
+            {{/each}}
+          
+    </tbody>
+   
+  </table>
+</div>
+<script>
+      function goBack(){
+          window.location.href ='/products'
+        }
+
+          function update(id) {
+       window.location.href = '/products/phanloai/edit-phanloai/' + id
+  }
+        function goToAdd(){
+          window.location.href='/products/phanloai/new-phanloai'
+        }
+          function deletepl(id) {
+    $.ajax({
+      type: "DELETE",
+      url: '/products/phanloai/delete/' + id,
+      success: function (data) {
+        if (data.res == true) {
+          window.location.href = '/products/phanloai'
+        }
+      }
+    })
+  }
+</script>

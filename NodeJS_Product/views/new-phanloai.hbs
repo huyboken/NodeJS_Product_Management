@@ -1,0 +1,54 @@
+<div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <h1>ADD </h1>
+          </div>
+          <div class="col-sm-6  text-right">
+            <button type="button" class="btn btn-primary"  onclick ="goBack()" >Go Back</button>
+          </div>
+        </div>
+        <form action="/products/phanloai/new-phanloai" method="POST">
+            <div class="form-group">
+              <label for="name">Name:</label>
+              <input type="text" class="form-control" onChange="validateProductName()"required placeholder="Name" id="name"
+              name="name">
+              <p id="productNameError"></p>
+            </div>
+            <button id="btn"type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          </div>
+          
+
+      </div>
+      <script>
+        var isNameValid=false
+
+        function validateProductName(){
+          let value = document.getElementById('name').value
+          if (!value || value.length==0 || value.length>100){
+            document.getElementById('productNameError').innerText='productNameError'
+            //document.getElementById("btn").disabled = true;
+              isNameValid = false
+          }
+          else{
+              document.getElementById('productNameError').innerText=''
+              isNameValid = true  
+          }
+          validateForm()
+        }
+
+  
+        function validateForm(){
+              if(isDateValid == false || isNameValid == false || isPriceValid == false){
+               document.getElementById('btn').disabled = true
+                }
+              else
+              {
+               document.getElementById('btn').disabled = false
+                }
+                }
+        function goBack(){
+          window.location.href = '/products'
+        }
+
+      </script>

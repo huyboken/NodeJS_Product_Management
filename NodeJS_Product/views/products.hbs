@@ -1,0 +1,82 @@
+
+    <nav class="navbar navbar-expand-md navbar-fixed-top navbar-dark bg-dark main-nav " >
+      <div class="container text-xs-center">
+        <a class="navbar-brand" href="">Sản Phẩm</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse " id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" onclick="phanloai()">Phân loại</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#" onclick="add()">Thêm mới sản phẩm</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<div class="container ju">
+  <div class="row">
+    <div class="col-sm-6 text-right mt-5">
+      <h2>Sản Phẩm</h2>
+    </div>
+  </div>
+  <table class="table table-hover mt-5" >
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Image</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#each list}}
+      <tr>
+        <td>{{this._id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.price}}</td>
+        <td>{{formartDate this.date}}</td>
+        <td>{{this.idLoaiSP.name}}</td>
+       <td><img width="50" height="50"  src="http://localhost:3001/images/{{this.img}}"></td>
+        <td class='text-right'>
+          <button type="button" class="btn btn-success" onclick="update('{{this._id}}')">Update</button>
+          <button type="button" class="btn btn-info"
+            onclick="deleteproduct('{{this._id}}')">Delete</button>
+        </td>
+        {{/each}}
+
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<script>
+  function add() {
+
+    window.location.href = '/products/add'
+  }
+  function update(id) {
+    window.location.href = '/products/edit-product/' + id
+  }
+  function deleteproduct(id) {
+    $.ajax({
+      type: "DELETE",
+      url: '/products/delete/' + id,
+      success: function (data) {
+        if (data.res == true) {
+          window.location.href = '/products'
+        }
+      }
+    })
+  }
+    function phanloai(){
+    window.location.href='/products/phanloai'
+  }
+</script>
